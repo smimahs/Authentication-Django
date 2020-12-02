@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AuthTest',
+    'rest_framework',
     
 ]
 
@@ -78,9 +79,9 @@ WSGI_APPLICATION = 'question2.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbquestion2', 
-        'USER': 'shamim', 
-        'PASSWORD': '13761376',
+        'NAME': 'dbtest', 
+        'USER': 'postgres', 
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
@@ -105,7 +106,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
