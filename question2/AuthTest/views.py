@@ -7,22 +7,19 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def send_Password(request,mobile):
     password = random.randint(1000, 9999)
-    #mobile=request.GET["mobile"]
-
     #send password to mobile number
-    user=UserProfile.objects.filter(mobile=mobile).first()
-    user.temp_password=str(password)
-    user.save()
+    request.session['temppass']=password
     return password
 
 @csrf_exempt   
 def check_temporary_password(request):
     if request.method == 'POST': 
-        #mobile=request.POST.get("mobile")
         mobile=request.GET["mobile"]
         temp_password=request.POST.get("temp_password")
+
         user=UserProfile.objects.filter(mobile=mobile).first()
-        if(user.temp_password == temp_password):
+
+        if(str(request.session['temppass']) == str(temp_password)):
             return HttpResponse("user Athenticate")
         else:
             return HttpResponse("password is wrong")    
